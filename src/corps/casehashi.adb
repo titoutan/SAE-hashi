@@ -47,11 +47,11 @@ package body CaseHashi is
       end if;
    end ObtenirPont;
 
-   -- Modifie l'ile i de la case c
-   -- nécessite que le type de la case soit ILE
-   -- lève l'exception TYPE_INCOMPATIBLE si le type de la case n'est pas une
-   -- ile
-      function modifierIle
+   -----------------
+   -- modifierIle --
+   -----------------
+
+   function modifierIle
      (C : in Type_CaseHashi; I : in Type_Ile) return Type_CaseHashi
    is
       NewC : Type_CaseHashi;
@@ -65,12 +65,11 @@ package body CaseHashi is
       return NewC;
    end modifierIle;
 
-   -- Modifie le pont p de la case
-   -- Si le pont est dejà de valeur UN, alors il prend la valeur DEUX
-   -- c nécessite que le type de la case soit PONT
-   -- lève l'exception TYPE_INCOMPATIBLE si le type de la case n'est
-   -- pas un pont
-      function modifierPont
+   ------------------
+   -- modifierPont --
+   ------------------
+
+   function modifierPont
      (C : in Type_CaseHashi; p : in Type_Pont) return Type_CaseHashi
    is
       NewC : Type_CaseHashi;
@@ -87,6 +86,7 @@ package body CaseHashi is
       end if;
       return NewC;
    end modifierPont;
+
 
    -- retourne VRAI si les cases C1 et C2 sont égales et FAUX sinon
    function "=" (C1 : in Type_CaseHashi; C2 : in Type_CaseHashi) return Boolean is

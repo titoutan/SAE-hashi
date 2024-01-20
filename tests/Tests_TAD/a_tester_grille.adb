@@ -361,7 +361,8 @@ package body a_tester_Grille is
       G  := ConstruireGrille (3, 3);
       Co := ConstruireCoordonnees (2, 2);
       c  := ConstruireCase (Co);
-      I  := ConstruireIle (0);
+      I  := ConstruireIle (1);
+      I  := ModifierIle(I,1);
       c  := modifierIle (c, I);
       modifierCase (G, c);
       return estComplete (G);
@@ -414,7 +415,8 @@ package body a_tester_Grille is
       -- construction de la 1ere ile
       Co := ConstruireCoordonnees (1, 2);
       c  := ConstruireCase (Co);
-      I1 := ConstruireIle (0);
+      I1 := ConstruireIle (1);
+      I1  := ModifierIle(I1,1);
       c  := modifierIle (c, I1);
       modifierCase (G, c);
       Nb := nbIleCompletes (G);
@@ -444,7 +446,8 @@ package body a_tester_Grille is
       -- construction de la 1ere ile
       Co := ConstruireCoordonnees (1, 2);
       c  := ConstruireCase (Co);
-      I1 := ConstruireIle (0);
+      I1 := ConstruireIle (1);
+      I1  := ModifierIle(I1,1);
       c  := modifierIle (c, I1);
       modifierCase (G, c);
       Nb := nbIleCompletes (G);
@@ -452,6 +455,7 @@ package body a_tester_Grille is
       Co := ConstruireCoordonnees (2, 1);
       c  := ConstruireCase (Co);
       I2 := ConstruireIle (0);
+      c  := modifierIle (c, I2);
       c  := modifierIle (c, I2);
       modifierCase (G, c);
       return nbIleCompletes (G) = Nb + 1;
@@ -476,14 +480,16 @@ package body a_tester_Grille is
       -- construction de la 1ere ile
       Co1 := ConstruireCoordonnees (1, 2);
       c1  := ConstruireCase (Co1);
-      I1  := ConstruireIle (0);
+      I1  := ConstruireIle (1);
+      I1  := ModifierIle(I1,1);
       c1  := modifierIle (c1, I1);
       modifierCase (G, c1);
       Nb := nbIleCompletes (G);
       -- construction de la 2nd ile
       Co2 := ConstruireCoordonnees (2, 1);
       c2  := ConstruireCase (Co2);
-      I2  := ConstruireIle (0);
+      I2  := ConstruireIle (1);
+      I2  := ModifierIle(I2,1);
       c2  := modifierIle (c2, I2);
       modifierCase (G, c2);
       return

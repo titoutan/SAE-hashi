@@ -3,7 +3,7 @@ package body Grille is
    function ConstruireGrille (nbl : in Integer ; nbc : in Integer) return Type_Grille is
       G : Type_Grille;
    begin
-      if nbl < 1 or nbl > TAILLE_MAX or nbc < 1 or nbc > TAILLE_MAX then
+      if nbl <= 1 or nbl > TAILLE_MAX or nbc <= 1 or nbc > TAILLE_MAX then
          raise TAILLE_INVALIDE;
       end if;
 
@@ -45,12 +45,12 @@ package body Grille is
    begin
       for L in 1 .. G.nbl loop
          for C in 1 .. G.nbc loop
-            if estIle(ObtenirTypeCase(G.g(L, C))) and not estIleComplete(ObtenirIle(G.g(L, C))) then
+            if estIle(ObtenirTypeCase(G.g(L, C))) and then not estIleComplete(ObtenirIle(G.g(L, C))) then
                return False;
             end if;
          end loop;
       end loop;
-      return True;
+      return not estGrilleVide(G);
    end estComplete;
 
    function nbIle (G : in Type_Grille) return Integer is
@@ -71,7 +71,7 @@ package body Grille is
    begin
       for L in 1 .. G.nbl loop
          for C in 1 .. G.nbc loop
-            if estIle(ObtenirTypeCase(G.g(L, C))) and estIleComplete(ObtenirIle(G.g(L, C))) then
+            if estIle(ObtenirTypeCase(G.g(L, C))) and then estIleComplete(ObtenirIle(G.g(L, C))) then
                Count := Count + 1;
             end if;
          end loop;

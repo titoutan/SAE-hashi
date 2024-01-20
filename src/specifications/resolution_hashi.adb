@@ -77,7 +77,6 @@ package body Resolution_Hashi is
       -- ...
 
       -- Exemple de sortie (à adapter selon l'implémentation réelle)
-      s := (others => (others => <>));
       NbPonts := 0;
       NbNoeuds := 0;
    end construireTableauSuccesseurs;

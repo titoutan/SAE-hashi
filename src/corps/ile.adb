@@ -8,7 +8,7 @@ package body Ile is
    -- lève l'exception VALEUR_NOEUD_INVALIDE si 0 <= v ou v > 8
    function ConstruireIle (v : in Integer) return Type_Ile is
    begin
-      if v <= 0 or v > 8 then
+      if v < 0 or v > 8 then
          raise VALEUR_ILE_INVALIDE;
       else
          return (v => v);
