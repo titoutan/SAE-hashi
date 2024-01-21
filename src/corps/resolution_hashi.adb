@@ -117,12 +117,44 @@ package body Resolution_Hashi is
      (G     : in out Type_Grille; source : in out Type_CaseHashi;
       cible : in out Type_CaseHashi; pont : in Type_Pont;
       o     : in     Type_Orientation) is
+      debut: Integer;
+      fin: Integer;
+      stable: Integer;
    begin
-      -- Implémentation de la construction du chemin
-      -- ...
-
-      -- Exemple d'opérations (à adapter selon l'implémentation réelle)
-      Put_Line("Construction du chemin...");
+      case ValeurOrientation(o) is
+      when -1 =>
+         debut := ObtenirLigne(ObtenirCoordonnee(cible));
+         fin := ObtenirLigne(ObtenirCoordonnee(source));
+         stable := ObtenirColonne(ObtenirCoordonnee(source));
+         for i in debut..fin loop
+            modifierPont(ObtenirCase(G,ConstruireCoordonnees(i, stable)),pont);
+         end loop;
+      when 1 =>
+         debut := ObtenirLigne(ObtenirCoordonnee(source));
+         fin := ObtenirLigne(ObtenirCoordonnee(cible));
+         stable := ObtenirColonne(ObtenirCoordonnee(source));
+         for i in debut..fin loop
+            modifierPont(ObtenirCase(G,ConstruireCoordonnees(i, stable)),pont);
+         end loop;
+      when -2 =>
+         debut := ObtenirColonne(ObtenirCoordonnee(source));
+         fin := ObtenirColonne(ObtenirCoordonnee(cible));
+         stable := ObtenirLigne(ObtenirCoordonnee(source));
+         for i in debut..fin loop
+            modifierPont(ObtenirCase(G,ConstruireCoordonnees(stable, i)),pont);
+         end loop;
+      when 2 =>
+         debut := ObtenirColonne(ObtenirCoordonnee(cible));
+         fin := ObtenirColonne(ObtenirCoordonnee(source));
+         stable := ObtenirLigne(ObtenirCoordonnee(source));
+         for i in debut..fin loop
+            modifierPont(ObtenirCase(G,ConstruireCoordonnees(stable, i)),pont);
+         end loop;
+      when others =>
+         raise PAS_D_ILE_CIBLE;
+      end case;
+      modifierIle(ObtenirIle(source), ObtenirValeur(pont));
+      modifierIle(ObtenirIle(cible), ObtenirValeur(pont));
    end construireLeChemin;
 
    procedure ResoudreHashi (G : in out Type_Grille; Trouve : out Boolean) is
