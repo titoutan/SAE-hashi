@@ -3,7 +3,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 
 package body Resolution_Hashi is
 
-      procedure rechercherUneIleCible
+   procedure rechercherUneIleCible
      (G      : in Type_Grille; C : in Type_CaseHashi; O : in Type_Orientation;
       Trouve :    out Boolean; ile : out Type_CaseHashi)
    is
@@ -48,7 +48,7 @@ package body Resolution_Hashi is
                      -- si son predecesseur est
                      -- de valeur 1 on continue
                      if (estPont (ObtenirTypeCase (caseCourante))
-                        and then ObtenirPont (caseCourante) = UN)
+                         and then ObtenirPont (caseCourante) = UN)
                        or (EstIle(ObtenirTypeCase(CaseCourante)))
                      then
                         caseCourante := Suivant;
@@ -72,13 +72,45 @@ package body Resolution_Hashi is
    procedure construireTableauSuccesseurs
      (G : in Type_Grille; C : Type_CaseHashi; s : out Type_Tab_Successeurs;
       NbPonts : out Integer; NbNoeuds : out Integer) is
+      ileNord: Type_CaseHashi;
+      ileSud: Type_CaseHashi;
+      ileEst: Type_CaseHashi;
+      ileOuest: Type_CaseHashi;
+      trouve: Boolean;
    begin
-      -- Implémentation de la construction du tableau des successeurs
-      -- ...
-
-      -- Exemple de sortie (à adapter selon l'implémentation réelle)
       NbPonts := 0;
       NbNoeuds := 0;
+      rechercherUneIleCible(G,C,NORD,trouve,ileNord);
+      if trouve then
+         NbPonts := NbPonts + Integer'Max(ObtenirValeur(ObtenirIle(ileNord)),2);
+         NbNoeuds := NbNoeuds + 1;
+      else
+         ileNord := construireCase(ConstruireCoordonnees(0,0));
+      end if;
+      rechercherUneIleCible(G,C,SUD,trouve,ileSud);
+      if trouve then
+         NbPonts := NbPonts + Integer'Max(ObtenirValeur(ObtenirIle(ileSud)),2);
+         NbNoeuds := NbNoeuds + 1;
+      else
+         ileSud := construireCase(ConstruireCoordonnees(0,0));
+      end if;
+
+      rechercherUneIleCible(G,C,EST,trouve,ileEst);
+      if trouve then
+         NbPonts := NbPonts + Integer'Max(ObtenirValeur(ObtenirIle(ileEst)),2);
+         NbNoeuds := NbNoeuds + 1;
+      else
+         ileEst := construireCase(ConstruireCoordonnees(0,0));
+      end if;
+      rechercherUneIleCible(G,C,OUEST,trouve,ileOuest);
+      if trouve then
+         NbPonts := NbPonts + Integer'Max(ObtenirValeur(ObtenirIle(ileOuest)),2);
+         NbNoeuds := NbNoeuds + 1;
+      else
+         ileOuest := construireCase(ConstruireCoordonnees(0,0));
+      end if;
+
+      s := (NORD => ileNord, SUD => ileSud, EST => ileEst, OUEST => ileOuest);
    end construireTableauSuccesseurs;
 
    procedure construireLeChemin
