@@ -14,6 +14,7 @@ package a_tester_ile is
    function Test_ile_P4b return Boolean; --5
    function Test_ile_Exception_1a return Boolean; --6
    function Test_ile_Exception_1b return Boolean; --7
+   function Test_ile_Exception_1c return Boolean; --7
    function Test_ile_Exception_2a return Boolean; --8
    function Test_ile_Exception_2b return Boolean; --9
    function Test_ile_Exception_3 return Boolean; --10
@@ -33,6 +34,8 @@ package a_tester_ile is
        To_Unbounded_String ("echec de l'exception 1a Ile")),
       (Test_ile_Exception_1b'Access,
        To_Unbounded_String ("echec de l'exception 1b Ile")),
+      (Test_ile_Exception_1c'Access,
+       To_Unbounded_String ("echec de l'exception 1c Ile")),
       (Test_ile_Exception_2a'Access,
        To_Unbounded_String ("echec de l'exception 2a Ile")),
       (Test_ile_Exception_2b'Access,

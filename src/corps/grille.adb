@@ -123,9 +123,11 @@ package body Grille is
       end if;
    end obtenirSuivant;
 
-   procedure modifierCase (G : in out Type_Grille; C : in Type_CaseHashi) is
+   function modifierCase (G : in Type_Grille; C : in Type_CaseHashi) return Type_Grille is
+      clone: Type_Grille := G;
    begin
-      G.g(ObtenirLigne(ObtenirCoordonnee(C)), ObtenirColonne(ObtenirCoordonnee(C))) := C;
+      clone.g(ObtenirLigne(ObtenirCoordonnee(C)), ObtenirColonne(ObtenirCoordonnee(C))) := C;
+      return clone;
    end modifierCase;
 
 end Grille;

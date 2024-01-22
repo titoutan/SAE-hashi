@@ -8,7 +8,7 @@ package body CaseHashi is
    -- construit une case dont la valeur est la mer
    function ConstruireCase (C : in Type_Coordonnee) return Type_CaseHashi is
    begin
-      return (C => C, T => MER, I => ConstruireIle(0), P => UN);
+      return (C => C, T => MER, I => ConstruireIle(1), P => UN);
    end ConstruireCase;
 
    -- Retourne le type de la case c : MER, ILE ou PONT

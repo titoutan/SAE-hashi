@@ -18,4 +18,9 @@ package body Pont is
    begin
       return p /= POTENTIEL;
    end EstInstancie;
+
+   function "=" (p1: in Type_Pont; p2: in Type_Pont) return boolean is
+   begin
+      return ObtenirValeur(p1) = ObtenirValeur(p2);
+   end "=";
 end Pont;

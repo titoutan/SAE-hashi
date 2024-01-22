@@ -1,4 +1,8 @@
 with Ada.Text_IO; use Ada.Text_IO;
+with TypeCase; use TypeCase;
+with Ile; use Ile;
+with Coordonnee; use Coordonnee;
+with Pont; use Pont;
 -- Ajoutez les déclarations nécessaires ici
 
 package body Resolution_Hashi is
@@ -127,34 +131,34 @@ package body Resolution_Hashi is
          fin := ObtenirLigne(ObtenirCoordonnee(source));
          stable := ObtenirColonne(ObtenirCoordonnee(source));
          for i in debut..fin loop
-            modifierPont(ObtenirCase(G,ConstruireCoordonnees(i, stable)),pont);
+            G := modifierCase(G,modifierPont(ObtenirCase(G,ConstruireCoordonnees(i, stable)),pont));
          end loop;
       when 1 =>
          debut := ObtenirLigne(ObtenirCoordonnee(source));
          fin := ObtenirLigne(ObtenirCoordonnee(cible));
          stable := ObtenirColonne(ObtenirCoordonnee(source));
          for i in debut..fin loop
-            modifierPont(ObtenirCase(G,ConstruireCoordonnees(i, stable)),pont);
+            G := modifierCase(G,modifierPont(ObtenirCase(G,ConstruireCoordonnees(i, stable)),pont));
          end loop;
       when -2 =>
          debut := ObtenirColonne(ObtenirCoordonnee(source));
          fin := ObtenirColonne(ObtenirCoordonnee(cible));
          stable := ObtenirLigne(ObtenirCoordonnee(source));
          for i in debut..fin loop
-            modifierPont(ObtenirCase(G,ConstruireCoordonnees(stable, i)),pont);
+            G := modifierCase(G,modifierPont(ObtenirCase(G,ConstruireCoordonnees(stable, i)),pont));
          end loop;
       when 2 =>
          debut := ObtenirColonne(ObtenirCoordonnee(cible));
          fin := ObtenirColonne(ObtenirCoordonnee(source));
          stable := ObtenirLigne(ObtenirCoordonnee(source));
          for i in debut..fin loop
-            modifierPont(ObtenirCase(G,ConstruireCoordonnees(stable, i)),pont);
+            G := modifierCase(G,modifierPont(ObtenirCase(G,ConstruireCoordonnees(stable, i)),pont));
          end loop;
       when others =>
          raise PAS_D_ILE_CIBLE;
       end case;
-      modifierIle(ObtenirIle(source), ObtenirValeur(pont));
-      modifierIle(ObtenirIle(cible), ObtenirValeur(pont));
+      G := modifierCase(G,modifierIle(source, ConstruireIle(v => ObtenirValeur(pont))));
+      G := modifierCase(G,modifierIle(cible, ConstruireIle(v => ObtenirValeur(pont))));
    end construireLeChemin;
 
    procedure ResoudreHashi (G : in out Type_Grille; Trouve : out Boolean) is
